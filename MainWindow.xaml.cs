@@ -23,6 +23,10 @@ namespace Calculator
     public class Calculator
     {
         //Konstruktoren
+        public Calculator(decimal x, decimal y)
+        {
+
+        }
         public Calculator()
         {
 
