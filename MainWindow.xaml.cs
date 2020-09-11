@@ -16,60 +16,22 @@ using System.Windows.Shapes;
 
 namespace Calculator
 {
-    /// <summary>
-    /// Interaktionslogik für MainWindow.xaml
-    /// </summary>
-
-    public class Calculator
-    {
-        //Konstruktoren
-        public Calculator(decimal x, decimal y)
-        {
-
-        }
-        public Calculator()
-        {
-
-        }
-
-        //Variablen
-        public decimal x { get; set; }
-        public decimal y { get; set; }
-
-        //Methoden
-        public decimal Addiere(decimal x, decimal y)
-        {
-            return x + y;
-        }
-        public decimal Subtrahiere(decimal x, decimal y)
-        {
-            return x - y;
-        }
-        public decimal Multipiziere(decimal x, decimal y)
-        {
-            return x * y;
-        }
-        public decimal Dividiere(decimal x, decimal y)
-        {
-            return x / y;
-        }
-        public bool addActive = false;
-        public bool subActive = false;
-        public bool multiActive = false;
-        public bool divActive = false;
-
-        public decimal ergebnis = 0;
-
-    }
     public partial class MainWindow : Window
     {
+
+        public Calculator calculator = new Calculator();
+        public List<string> verlaufListe = new List<string>();
 
         public MainWindow()
         {
             InitializeComponent();
+            verlaufBox.ItemsSource = verlaufListe;
         }
 
-        Calculator calculator = new Calculator();
+        private void Update()
+        {
+            verlaufBox.Items.Refresh();
+        }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
@@ -170,32 +132,43 @@ namespace Calculator
                 calculator.ergebnis = calculator.Addiere(calculator.x, calculator.y);
                 calculator.ergebnis = Decimal.Round(calculator.ergebnis, 10);
                 ergebnisBox.Text = calculator.ergebnis.ToString();
+                calculator.GanzeRechnung = $"{calculator.x} + {calculator.y} = {calculator.ergebnis}";
+                verlaufListe.Add(calculator.GanzeRechnung);
                 calculator.addActive = false;
+                Update();
             }
             else if (calculator.subActive == true)
             {
                 calculator.ergebnis = calculator.Subtrahiere(calculator.x, calculator.y);
                 calculator.ergebnis = Decimal.Round(calculator.ergebnis, 10);
                 ergebnisBox.Text = calculator.ergebnis.ToString();
+                calculator.GanzeRechnung = $"{calculator.x} - {calculator.y} = {calculator.ergebnis}";
+                verlaufListe.Add(calculator.GanzeRechnung);
                 calculator.subActive = false;
+                Update();
             }
             else if (calculator.multiActive == true)
             {
                 calculator.ergebnis = calculator.Multipiziere(calculator.x, calculator.y);
                 calculator.ergebnis = Decimal.Round(calculator.ergebnis, 10);
                 ergebnisBox.Text = calculator.ergebnis.ToString();
+                calculator.GanzeRechnung = $"{calculator.x} * {calculator.y} = {calculator.ergebnis}";
+                verlaufListe.Add(calculator.GanzeRechnung);
                 calculator.multiActive = false;
+                Update();
             }
             else if (calculator.divActive == true)
             {
                 calculator.ergebnis = calculator.Dividiere(calculator.x, calculator.y);
                 calculator.ergebnis = Decimal.Round(calculator.ergebnis, 10);
                 ergebnisBox.Text = calculator.ergebnis.ToString();
+                calculator.GanzeRechnung = $"{calculator.x} / {calculator.y} = {calculator.ergebnis}";
+                verlaufListe.Add(calculator.GanzeRechnung);
                 calculator.divActive = false;
+                Update();
             }
             else
                 ergebnisBox.Text = calculator.y.ToString();
-
         }
     }
 }

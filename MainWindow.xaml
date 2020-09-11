@@ -5,9 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Calculator"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="500">
+        Title="MainWindow" Height="600" Width="900">
     <Grid>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
@@ -62,6 +66,17 @@
                 </LinearGradientBrush>
             </Border.Background>
             <TextBlock x:Name="ergebnisBox" Grid.RowSpan="2" Grid.ColumnSpan="5" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10" FontSize="50" Width="450" TextWrapping="Wrap" TextAlignment="Right"></TextBlock>
+        </Border>
+        <Border BorderThickness="3" BorderBrush="Black" Grid.Column="5" Grid.ColumnSpan="4"  Grid.Row="0" Grid.RowSpan="6" Margin="25" >            
+            <ListBox x:Name="verlaufBox" Grid.Column="5" Margin="5" Grid.RowSpan="6" Grid.ColumnSpan="4">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" x:Name="list_field">
+                            <TextBlock Text="{Binding}" Width="auto" Margin="10" Foreground="Black"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </Border>
 
     </Grid>
